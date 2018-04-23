@@ -20,6 +20,158 @@
       </div>
   </footer>
   <!-- END footer -->
-  <t4 type="navigation" name="Footer scripts getter" id="32" />
+
+  <nav id="site-search" class="section section--site-search" role="navigation" tabindex="-1">
+
+      <div class="wrapper clearfix">
+        <h2 class="sr-only">Search the site</h2>
+
+          <form role="search" class="site-search section--site-search__top-wrapper" action="https://www.yorksj.ac.uk/search/?" method="GET">
+                <label for="search-site-input" class="fluid-search__label">What are you looking for?</label>
+                <input type="hidden" name="collection" value="yorksj-meta">
+                <input type="hidden" name="profile" value="_default">
+<!--<input type="hidden" name="form" value="search">-->
+                  <input type="hidden" name="tab" value="all">
+                  <div style="position: relative; display: inline-block; width: 100%;">
+                      <input required="" type="text" name="query" class="fluid-search__input meta-query tt-input" id="search-site-input" placeholder="Search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;" autofocus>
+                      <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: "Druk Web", Arial, Helvetica, sans-serif; font-size: 70px; font-style: normal; font-variant: normal; font-weight: 700; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
+                  </div>
+                <input type="submit" class="fluid-search__submit" id="search-search" value="Search">
+<!--<button type="reset" class="reset-btn" ></button>-->
+                <i class="fa fa-search" aria-hidden="true"></i>
+
+          </form>
+
+        <button id="close-site-search" class="section--site-search__close">
+              <span class="sr-only">
+                  Close site search
+              </span>
+          </button>
+    </nav>
+<!--[if gte IE 9]><!-->
+<!-- Using version 1 for consistency with IE8 version in <head> -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!--<![endif]-->
+
+  <script type="text/javascript" src="/media/development-assets/javascript/plugins.min.js"></script>
+  <script type="text/javascript" src="/media/development-assets/javascript/main.min.js"></script>
+  <script type="text/javascript" src="/media/development-assets/javascript/back-to-top-scroll.js"></script>
+<!--Funnelback Scripts-->
+<script type="text/javascript" src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/js/highlight.pack.js"></script>
+<!--<script  type="text/javascript" src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/_default/facetScript.js"></script>-->
+<script  type="text/javascript" src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/_default/fb-scripts.js"></script>
+<script  type="text/javascript" src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/_default/facetLinksClass.js"></script>
+
+<script src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/js/typeahead.bundle.js"></script>
+<script src="https://yorksj.funnelback.co.uk/s/resources-global/js/handlebars.js"></script>
+<script src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/js/funnelback.autocompletion.js"></script>
+
+<script>
+// Auto completion setup
+jQuery('#search-site-input').autocompletion({
+datasets: {
+organic: {
+collection: 'yorksj-meta',
+profile : '_default',
+program: 'https://yorksj.funnelback.co.uk/s/suggest.json',
+format: 'extended',
+alpha: '0.5',
+show: '5',
+sort: '0',
+group: true,
+extraClass: 'section--site-search__top-wrapper',
+template: {
+          suggestion: '<ul class="ui-autocomplete"><li class="ui-autocomplete__item"><a>{{label}}</a></li></ul>',
+          }
+},
+
+Courses: {
+collection: 'yorksj-courses',
+profile : '_default',
+program: 'https://yorksj.funnelback.co.uk/s/suggest.json',
+format: 'extended',
+alpha: '0.5',
+show: '4',
+sort: '0',
+group: true,
+
+template: {
+          header:'<h3 class="search-box__title">Courses</h3>',
+          suggestion: '<li class="ui-autocomplete__item"><a href="{{label.displayUrl}}"><div class="ui-autocomplete__content"><h3 class="teaser__title dropdown__title">{{label.metaData.courseTitle}}</h3></div></a><li>',
+          footer: '<a class="search-box--suggestion__show-all" href="https://www.yorksj.ac.uk/search/?collection=yorksj-meta&tab=courses&profile=_default&query=!null">Show all courses</a>',
+          notFound: '<ul class="ui-autocomplete"><li class="ui-autocomplete__item">No suggestion found.</li></ul>',
+          }
+},
+
+events: {
+collection: 'yorksj-news',
+profile : '_default',
+name : 'News',
+program: 'https://yorksj.funnelback.co.uk/s/suggest.json',
+format: 'extended',
+alpha: '0.5',
+show: '3',
+sort: '0',
+group: true,
+template: {
+          header:'<h3 class="search-box__title">News</h3>',
+          suggestion: '<li class="ui-autocomplete__item"><a href="{{label.displayUrl}}"><div class="ui-autocomplete__image">{{#if label.metaData.newsImage}}<div class="" style="background-size:cover; background-position:center; background-image:url(https://www.yorksj.ac.uk/{{label.metaData.newsImage}});"></div>{{else}}<div class="" style="background-size:cover; background-position:center; background-image:url(https://www.yorksj.ac.uk/media/content-assets/hosted-images/news-placeholder.jpg);"></div> {{/if}}</div><div class="ui-autocomplete__content"><h3 class="teaser__title dropdown__title">{{label.title}}</h3><h3 class="teaser__title dropdown__title">{{label.metaData.datePublished}}</h3></div></a><li>',
+          notFound: '<ul class="ui-autocomplete"><li class="ui-autocomplete__item">No suggestion found.</li></ul>',
+          }
+},
+
+Staff: {
+collection: 'yorksj-staff',
+profile : '_default',
+name : 'Staff',
+program: 'https://yorksj.funnelback.co.uk/s/suggest.json',
+format: 'extended',
+alpha: '0.5',
+show: '3',
+sort: '0',
+group: true,
+template: {
+          header:'<h3 class="search-box__title">People</h3>',
+          suggestion: '<li class="ui-autocomplete__item"><a href="{{label.displayUrl}}"><div class="ui-autocomplete__image">{{#if label.metaData.personImage}}<div class="" style="background-size:cover; background-position:center; background-image:url(https://www.yorksj.ac.uk/{{label.metaData.personImage}});"></div>{{else}}<img src="https://yorksj.funnelback.co.uk/s/resources/yorksj-meta/_default/user_profile.png" width="100px" height="100px">{{/if}}</div><div class="ui-autocomplete__content"><h3 class="teaser__title dropdown__title">{{label.title}}</h3><h3 class="teaser__title dropdown__title"> {{label.metaData.personDepartment}}</h3></div></a><li>',
+          notFound: '<ul class="ui-autocomplete"><li class="ui-autocomplete__item">No suggestion found.</li></ul>',
+          }
+},
+
+},
+length: 3
+});
+</script>
+
+<script>
+jQuery('#searchbox').autocompletion({
+  typeahead:{
+  classNames: {
+      menu: "tt-menu",
+      dataset: "tt-dataset",
+      input: 'typeahead-input',
+      hint: 'typeahead-hint',
+      selectable: 'typeahead-selectable'
+  }
+  },
+datasets: {
+organic: {
+collection: 'yorksj-meta',
+profile: '_default',
+show: 10,
+}
+},
+length: 3
+});
+</script>
+
+<!-- Funnelback Scripts End-->
+  <script type="text/javascript" src="//api.reciteme.com/asset/js?key=da429463c2838ba8cb32cc4c82225a3d7946051a"></script>
+<script type="text/javascript">
+Recite.load({
+  enableButton: '.reciteme'
+});
+</script>
+
+
 </body>
-</html>		
+</html>
